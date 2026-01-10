@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width,initial-scale=1" />
+	<title>Vynlo | Info</title>
+	<meta name="description" content="Official INFO page for the Vynlo project" />
+	<style>
+		:root{
+			--bg:#0f1724;
+			--card:#0b1220;
+			--muted:#9aa4b2;
+			--accent:#7c5cff;
+			--glass: rgba(255,255,255,0.04);
+			--radius:12px;
+			color-scheme: dark;
+			font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+		}
+		*{box-sizing:border-box}
+		html,body{height:100%}
+		body{
+			margin:0;
+			background: radial-gradient(1200px 600px at 10% 10%, rgba(124,92,255,0.12), transparent 6%),
+									radial-gradient(1000px 500px at 90% 90%, rgba(0,200,255,0.04), transparent 8%),
+									var(--bg);
+			color:#e6eef8;
+			-webkit-font-smoothing:antialiased;
+			-moz-osx-font-smoothing:grayscale;
+			padding:40px 20px;
+			display:flex;
+			align-items:center;
+			justify-content:center;
+		}
+		.container{max-width:980px;width:100%}
+		header{display:flex;align-items:center;gap:16px;margin-bottom:28px}
+		.logo{
+			width:64px;height:64px;border-radius:14px;background:linear-gradient(135deg,var(--accent),#00d1ff);display:flex;align-items:center;justify-content:center;box-shadow:0 6px 24px rgba(12,16,28,0.6);
+		}
+		.logo span{font-weight:700;color:#fff;font-size:20px;letter-spacing:0.6px}
+		h1{margin:0;font-size:28px}
+		p.lead{margin:6px 0 0;color:var(--muted)}
+
+		.card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));backdrop-filter: blur(6px);border-radius:var(--radius);padding:20px;border:1px solid rgba(255,255,255,0.04)}
+
+		.hero{display:grid;grid-template-columns:1fr 320px;gap:20px;align-items:start}
+		.intro{padding:22px}
+		.features{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:16px}
+		.feature{background:var(--glass);padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.02)}
+		.feature h4{margin:0 0 6px 0;font-size:15px}
+		.feature p{margin:0;color:var(--muted);font-size:13px}
+
+		.side{padding:18px}
+		.side h3{margin:0 0 8px 0}
+		.meta{display:flex;flex-direction:column;gap:10px;margin-top:12px}
+		.meta .row{display:flex;justify-content:space-between;color:var(--muted);font-size:13px}
+
+		.cta{display:flex;gap:10px;margin-top:18px}
+		.btn{background:linear-gradient(90deg,var(--accent),#00d1ff);padding:10px 14px;border-radius:10px;color:#071025;font-weight:600;border:none;cursor:pointer}
+		.ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:10px 14px;border-radius:10px;color:var(--muted);cursor:pointer}
+
+		footer{margin-top:18px;text-align:center;color:var(--muted);font-size:13px}
+
+		@media (max-width:880px){
+			.hero{grid-template-columns:1fr;}
+			.logo{width:56px;height:56px}
+			header{gap:12px}
+		}
+	</style>
+	</head>
+<body>
+	<div class="container">
+		<header>
+			<div class="logo"><span>Vynlo</span></div>
+			<div>
+				<h1>Vynlo™ | Quick Info</h1>
+				<p class="lead">Published by Vynlo account | Powered by Tylervox.Studio</p>
+			</div>
+		</header>
+
+		<main class="card hero" role="main">
+			<section class="intro">
+				<h2 style="margin-top:0">About this project</h2>
+				<p style="color:var(--muted)">This is the official information page for the Vynlo project. It contains all the essential details about the project, its features, and how to get started along with lightweight info pods as shown below this description.</p>
+
+				<div class="features">
+					<div class="feature">
+						<h4>Lightweight</h4>
+						<p>No info available.</p>
+					</div>
+					<div class="feature">
+						<h4>Responsive</h4>
+						<p>Grid layout adapts to mobile and desktop widths.</p>
+					</div>
+					<div class="feature">
+						<h4>Customizable</h4>
+						<p>Change colors, copy, and sections to fit your needs.</p>
+					</div>
+					<div class="feature">
+						<h4>Accessible</h4>
+						<p>High contrast colors and semantic markup for accessibility.</p>
+					</div>
+                    <div class="feature">
+						<h4>Version Updates</h4>
+						<h5>Version updates are handled automatically through the Vynlo platform.</h5>
+                        <li>[UPD] First version ever.</li>
+                        <p>The very first version of this project. (v1.0)</p>
+					</div>
+				</div>
+			</section>
+
+			<aside class="side">
+				<h3>Project Details</h3>
+				<div class="meta">
+					<div class="row"><span>Version</span><strong>1.0</strong></div>
+					<div class="row"><span>Status</span><strong>Demo</strong></div>
+					<div class="row"><span>Maintainer</span><strong>Speedymusic_lover2010</strong></div>
+				</div>
+
+				<div class="cta">
+					<button class="btn disabled" onclick="alert('Get Started is disabled due to main page errors. Sorry this button was disabled due to many main page functions being broken, thanks to this you only have access to the info page.');" aria-disabled="true">Get Started</button>
+					<button class="ghost" onclick="onSecondary()">Contact</button>
+				</div>
+
+				<footer>Made with care • © <span id="year"></span></footer>
+			</aside>
+		</main>
+	</div>
+
+	<script>
+		document.getElementById('year').textContent = new Date().getFullYear();
+		function onSecondary(){
+			const email = 'speedymusic_lover2010@outlook.com';
+			navigator.clipboard?.writeText(email).then(()=>{
+				alert('Contact email copied: '+email);
+			}, ()=>{
+				alert('Contact: '+email);
+			});
+		}
+	</script>
+</body>
+</html>
+
