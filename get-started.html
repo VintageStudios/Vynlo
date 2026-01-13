@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Get Started — Vynlo</title>
+  <style>
+    body{font-family:Inter,system-ui,Segoe UI,Roboto,Arial;background:#091123;color:#eaf3ff;margin:0;padding:30px;display:flex;align-items:center;justify-content:center;height:100vh}
+    .panel{max-width:760px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:28px;border-radius:12px;border:1px solid rgba(255,255,255,0.04)}
+    h1{margin:0 0 10px 0}
+    p{color:#9fb0c8}
+    .actions{margin-top:18px}
+    a.button{display:inline-block;background:#7c5cff;color:#05102a;padding:10px 14px;border-radius:10px;text-decoration:none;font-weight:600}
+    a.link{color:#9fb0c8;text-decoration:none;margin-left:12px}
+  </style>
+</head>
+<body>
+  <div class="panel">
+    <h1>Get Started with Vynlo</h1>
+    <p>This brief step by step guide shows how to get started with Vynlo. Follow the steps below to get started with Vynlo quickly.</p>
+
+    <ol>
+      <li>Click the "Continue" button below. This will open the authentication modal. (e.g.. the login/signup window)</li>
+      <li>Either log in or create a new account.</li>
+      <li>Once logged in, you can start adding media and creating playlists. There is a more formal guide available in the documentation.</li>
+    </ol>
+
+    <div class="actions">
+      <a class="button" href="index.html">Back to Info</a>
+      <a class="link" href="https://pages.github.com/" target="_blank" rel="noopener">Open guide</a>
+      <button id="continueBtn" style="margin-left:12px;padding:10px 14px;border-radius:10px;border:none;background:#00d1ff;color:#05102a;font-weight:700;cursor:pointer">Continue</button>
+    </div>
+  </div>
+
+  <!-- Auth Modal -->
+  <div id="authModal" style="display:none;position:fixed;inset:0;background:rgba(2,6,12,0.6);backdrop-filter:blur(4px);align-items:center;justify-content:center;z-index:60">
+    <div style="width:100%;max-width:720px;margin:28px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:22px;border-radius:12px;border:1px solid rgba(255,255,255,0.04);color:inherit;display:flex;gap:18px;">
+      <div style="flex:1">
+        <h2 style="margin-top:0">Welcome back</h2>
+        <p style="color:#9fb0c8">Log in to continue to Vynlo.</p>
+
+        <form id="loginForm" style="display:flex;flex-direction:column;gap:10px;margin-top:12px">
+          <input id="loginEmail" type="email" placeholder="Email" required style="padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit" />
+          <input id="loginPass" type="password" placeholder="Password" required style="padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit" />
+          <div style="display:flex;gap:8px;align-items:center">
+            <button type="button" class="button" onclick="submitLogin()">Log in</button>
+            <button type="button" style="background:transparent;border:none;color:#9fb0c8;cursor:pointer" onclick="showSignup()">Create account</button>
+          </div>
+        </form>
+      </div>
+
+      <div style="width:320px;border-left:1px solid rgba(255,255,255,0.02);padding-left:18px">
+        <h3 style="margin-top:0">New here?</h3>
+        <p style="color:#9fb0c8">Create an account to save your media, playlists, and profile.</p>
+
+        <form id="signupForm" style="display:none;flex-direction:column;gap:10px;margin-top:12px">
+          <input id="signupName" type="text" placeholder="Full name" style="padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit" />
+          <input id="signupEmail" type="email" placeholder="Email" style="padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit" />
+          <input id="signupPass" type="password" placeholder="Password" style="padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit" />
+          <div style="display:flex;gap:8px;align-items:center">
+            <button type="button" class="button" onclick="submitSignup()">Sign up</button>
+            <button type="button" style="background:transparent;border:none;color:#9fb0c8;cursor:pointer" onclick="showLogin()">Have an account?</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const continueBtn = document.getElementById('continueBtn');
+    const authModal = document.getElementById('authModal');
+    const loginForm = document.getElementById('loginForm');
+    const signupForm = document.getElementById('signupForm');
+
+    continueBtn.addEventListener('click', ()=>{
+      authModal.style.display = 'flex';
+      showLogin();
+    });
+
+    function showSignup(){
+      loginForm.style.display = 'none';
+      signupForm.style.display = 'flex';
+    }
+    function showLogin(){
+      loginForm.style.display = 'flex';
+      signupForm.style.display = 'none';
+    }
+
+    async function submitLogin(){
+      const email = document.getElementById('loginEmail').value.trim();
+      const pass = document.getElementById('loginPass').value;
+      if(!email || !pass){alert('Please enter email and password.');return}
+      try{
+        const res = await fetch('/api/accounts/login', {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({email, password: pass})});
+        const text = await res.text();
+        let data;
+        try{data = text ? JSON.parse(text) : null}catch(e){data = {raw:text}};
+        if(!res.ok) throw new Error((data && data.error) ? data.error : (data && data.message) ? data.message : text || 'Invalid credentials');
+        const user = data;
+        authModal.style.display = 'none';
+        // store a demo session in localStorage
+        localStorage.setItem('vynlo_user', JSON.stringify(user));
+        window.location.href = 'home.html';
+      }catch(err){alert('Login failed: '+(err.message||err))}
+    }
+
+    async function submitSignup(){
+      const name = document.getElementById('signupName').value.trim();
+      const email = document.getElementById('signupEmail').value.trim();
+      const pass = document.getElementById('signupPass').value;
+      if(!name || !email || !pass){alert('Please fill all fields.');return}
+      try{
+        const res = await fetch('/api/accounts', {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({name,email,password:pass})});
+        const text = await res.text();
+        let data;
+        try{data = text ? JSON.parse(text) : null}catch(e){data = {raw:text}};
+        if(!res.ok) throw new Error((data && data.error) ? data.error : (data && data.message) ? data.message : text || 'Create failed');
+        const created = data;
+        alert('Account created for ' + name + '. You are now logged in (demo).');
+        authModal.style.display = 'none';
+        localStorage.setItem('vynlo_user', JSON.stringify(created));
+        window.location.href = 'home.html';
+      }catch(err){alert('Signup failed: '+(err.message||err))}
+    }
+  </script>
+</body>
+</html>
