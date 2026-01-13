@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Profile — Vynlo</title>
+  <style>
+    body{font-family:Inter,system-ui,Segoe UI,Roboto,Arial;background:#071025;color:#eaf3ff;margin:0;padding:30px}
+    .card{max-width:780px;margin:0 auto;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:20px;border-radius:12px;border:1px solid rgba(255,255,255,0.04)}
+    .meta{display:flex;gap:12px;align-items:center}
+    .avatar{width:96px;height:96px;border-radius:16px;background:linear-gradient(135deg,#00d1ff,#7c5cff);display:flex;align-items:center;justify-content:center;font-size:36px;font-weight:700;color:#071025}
+    .muted{color:#9fb0c8}
+    .follow{margin-top:12px}
+    .btn{background:#7c5cff;color:#071025;padding:8px 12px;border-radius:10px;border:none;cursor:pointer;font-weight:700}
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="meta">
+      <div class="avatar" id="pvAvatar">U</div>
+      <div>
+        <h1 id="pvName">User</h1>
+        <div id="pvHandle" class="muted">@handle</div>
+        <div id="pvDesc" style="margin-top:8px;color:#9fb0c8;max-width:600px"></div>
+      </div>
+      <div style="margin-left:auto;text-align:right">
+        <div class="muted">Followers</div>
+        <div id="pvFollowers" style="font-weight:700">0</div>
+      </div>
+    </div>
+
+    <div style="margin-top:18px">
+      <button id="pvBack" class="btn">Back</button>
+    </div>
+
+    <section style="margin-top:18px">
+      <h2>Followers</h2>
+      <ul id="fList" style="list-style:none;padding:0;margin:0;display:grid;gap:6px"></ul>
+    </section>
+  </div>
+
+  <script>
+    function q(name){return new URL(location.href).searchParams.get(name)}
+    async function load(){
+      const id = q('id') || 'acct_1';
+      try{
+        const acct = await fetch('/api/account?id='+encodeURIComponent(id)).then(r=>r.json());
+        document.getElementById('pvAvatar').textContent = (acct.name?acct.name[0]:(acct.email||'U')[0]).toUpperCase();
+        document.getElementById('pvName').textContent = acct.name || acct.email || 'User';
+        document.getElementById('pvHandle').textContent = acct.name?('@'+acct.name.replace(/\s+/g,'').toLowerCase()):('@'+(acct.email||'user').split('@')[0]);
+        document.getElementById('pvDesc').textContent = acct.description || '';
+
+        const followers = await fetch('/api/followers').then(r=>r.json()).catch(()=>[]);
+        const my = (followers||[]).filter(f=>f.accountId === id);
+        document.getElementById('pvFollowers').textContent = my.length;
+        const list = document.getElementById('fList');
+        list.innerHTML = '';
+        my.forEach(f=>{
+          const li = document.createElement('li');
+          li.style.padding = '8px'; li.style.borderRadius='8px'; li.style.background='rgba(255,255,255,0.02)'; li.textContent = (f.name?f.name+' - ':'') + f.email;
+          list.appendChild(li);
+        });
+      }catch(e){console.error(e);alert('Failed to load profile')}
+    }
+    document.getElementById('pvBack').addEventListener('click', ()=>history.back());
+    load();
+  </script>
+</body>
+</html>

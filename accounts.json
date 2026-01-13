@@ -1,0 +1,25 @@
+[
+  {
+    "id": "acct_1",
+    "name": "Tyler",
+    "email": "speed@vynlo.com",
+    "createdAt": "2026-01-09T00:00:00.000Z",
+    "role": "user",
+    "description": "Lover of music and late-night drives.",
+    "passwordHash": "d41d8cd98f00b204e9800998ecf8427e",
+    "passwordSalt": "demo_salt_1",
+    "resetTokenHash": null,
+    "resetTokenExpiry": null
+  },
+  {
+    "id": "acct_1768002944534",
+    "name": "Copilot",
+    "email": "copilot@account.com",
+    "role": "user",
+    "createdAt": "2026-01-09T23:55:44.534Z",
+    "passwordHash": "d60f3170f045d3e5d2bc62129f311a38364fd5ae8f203ecae7826a6168dd7adf942f1abe1ed263a8bebfe4ca8ed2b04024ab0b99bd3a74e7394754b2e9869aa9",
+    "passwordSalt": "fea7d7cdb4ced2d0aea9ce3ec3943869",
+    "resetTokenHash": null,
+    "resetTokenExpiry": null
+  }
+]

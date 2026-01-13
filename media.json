@@ -1,0 +1,28 @@
+[
+  {
+    "id": "media_1",
+    "title": "Midnight Drive",
+    "type": "audio",
+    "category": "Lofi",
+    "url": "#",
+    "duration": 222,
+    "createdAt": "2026-01-09T00:00:00.000Z"
+  },
+  {
+    "id": "media_2",
+    "title": "City Lights (cover)",
+    "type": "audio",
+    "category": "Electronic",
+    "url": "#",
+    "duration": 241,
+    "createdAt": "2026-01-09T00:00:00.000Z"
+  },
+  {
+    "id": "media_3",
+    "title": "Sample Image",
+    "type": "image",
+    "category": "Artwork",
+    "url": "#",
+    "createdAt": "2026-01-09T00:00:00.000Z"
+  }
+]

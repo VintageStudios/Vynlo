@@ -1,0 +1,350 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Home — Vynlo</title>
+  <meta name="description" content="Home with media gallery and account display" />
+  <style>
+    :root{--bg:#071025;--panel:#0b1624;--muted:#9fb0c8;--accent:#7c5cff}
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,Arial;background:linear-gradient(180deg,#041226 0%, #071025 100%);color:#eaf3ff;padding:28px}
+    .wrap{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:320px 1fr;gap:20px}
+    header.site{grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{width:54px;height:54px;border-radius:12px;background:linear-gradient(135deg,var(--accent),#00d1ff);display:flex;align-items:center;justify-content:center;font-weight:700}
+    nav a{color:var(--muted);text-decoration:none;margin-left:12px}
+
+    .profile{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:18px;border-radius:12px;border:1px solid rgba(255,255,255,0.04)}
+    .avatar{width:84px;height:84px;border-radius:20px;background:linear-gradient(135deg,#00d1ff,#7c5cff);display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:700;color:#071025}
+    .profile h3{margin:12px 0 4px}
+    .handle{color:var(--muted);font-size:13px}
+    .stats{display:flex;gap:12px;margin-top:12px}
+    .stat{background:rgba(255,255,255,0.02);padding:8px 10px;border-radius:10px;font-size:13px}
+    .follow{margin-top:12px}
+    .btn{background:var(--accent);color:#071025;padding:8px 12px;border-radius:10px;border:none;cursor:pointer;font-weight:700}
+
+    .content{display:flex;flex-direction:column;gap:14px}
+    .search{display:flex;gap:10px}
+    .search input{flex:1;padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit}
+    .media-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px}
+    .media{background:var(--panel);padding:12px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);display:flex;flex-direction:column;gap:10px}
+    .thumb{height:140px;border-radius:10px;background:linear-gradient(180deg, rgba(124,92,255,0.14), rgba(0,209,255,0.06));position:relative;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700}
+    .play{position:absolute;right:10px;bottom:10px;background:rgba(0,0,0,0.35);backdrop-filter: blur(4px);padding:8px;border-radius:10px;cursor:pointer}
+    .meta{display:flex;justify-content:space-between;align-items:center}
+    .title{font-weight:700}
+    .sub{color:var(--muted);font-size:13px}
+
+    @media (max-width:900px){.wrap{grid-template-columns:1fr;}.brand{gap:8px}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="site">
+      <div class="brand">
+        <div class="logo">V</div>
+        <div>
+          <div style="font-weight:700">Vynlo</div>
+          <div style="color:var(--muted);font-size:13px">Your personal media hub</div>
+        </div>
+      </div>
+      <nav>
+        <a href="index.html">Info</a>
+        <a href="get-started.html">Get Started</a>
+        <a href="home.html">Home</a>
+      </nav>
+    </header>
+
+    <aside class="profile">
+        <div style="display:flex;gap:12px;align-items:center">
+        <div class="avatar" id="avatar">S</div>
+        <div>
+          <h3 id="acctName">Speed</h3>
+          <div class="handle" id="acctHandle">@speedymusic</div>
+          <div id="acctDesc" style="color:var(--muted);font-size:13px;margin-top:6px">Lover of music and late-night drives.</div>
+        </div>
+      </div>
+
+      <div class="stats">
+        <div class="stat"><div style="font-weight:700">128</div><div style="color:var(--muted);font-size:12px">Tracks</div></div>
+        <div class="stat"><div style="font-weight:700"><span id="followerCount">0</span></div><div style="color:var(--muted);font-size:12px">Followers</div></div>
+        <div class="stat"><div style="font-weight:700">72</div><div style="color:var(--muted);font-size:12px">Playlists</div></div>
+      </div>
+
+      <div class="follow">
+        <button id="followBtn" class="btn">Follow</button>
+        <button id="editProfileBtn" class="btn" style="margin-left:8px;background:#00d1ff;color:#05102a">Edit Profile</button>
+      </div>
+    </aside>
+
+    <main class="content">
+      <div class="search">
+        <input id="q" placeholder="Search media, artists, playlists..." />
+        <button class="btn" onclick="alert('Search is demo-only, please wait for the demo version to be updated.')">Search</button>
+      </div>
+
+      <section>
+        <h2 style="margin:6px 0 8px">Featured</h2>
+        <div class="media-grid">
+          <article class="media">
+            <div class="thumb">
+              <svg width="100%" height="100%" viewBox="0 0 400 200" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><rect width="400" height="200" fill="url(#g1)"/><defs><linearGradient id="g1" x1="0" x2="1"><stop offset="0" stop-color="#7c5cff" stop-opacity="0.9"/><stop offset="1" stop-color="#00d1ff" stop-opacity="0.7"/></linearGradient></defs></svg>
+              <div class="play" onclick="play('Midnight Drive')">▶</div>
+            </div>
+            <div class="meta"><div><div class="title">Midnight Drive</div><div class="sub">Lofi / Chill</div></div><div><div style="color:var(--muted);font-size:13px">3:42</div></div></div>
+            <div style="text-align:right"><button class="btn viewAcct" data-account-id="acct_1">View Account</button></div>
+          </article>
+
+          <article class="media">
+            <div class="thumb">
+              <svg width="100%" height="100%" viewBox="0 0 400 200" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><rect width="400" height="200" fill="url(#g2)"/><defs><linearGradient id="g2" x1="0" x2="1"><stop offset="0" stop-color="#ff7ab6" stop-opacity="0.9"/><stop offset="1" stop-color="#7c5cff" stop-opacity="0.6"/></linearGradient></defs></svg>
+              <div class="play" onclick="play('Sunset Loop')">▶</div>
+            </div>
+            <div class="meta"><div><div class="title">Sunset Loop</div><div class="sub">Ambient</div></div><div><div style="color:var(--muted);font-size:13px">5:10</div></div></div>
+            <div style="text-align:right"><button class="btn viewAcct" data-account-id="acct_1">View Account</button></div>
+          </article>
+
+          <article class="media">
+            <div class="thumb">
+              <svg width="100%" height="100%" viewBox="0 0 400 200" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><rect width="400" height="200" fill="url(#g3)"/><defs><linearGradient id="g3" x1="0" x2="1"><stop offset="0" stop-color="#00d1ff" stop-opacity="0.9"/><stop offset="1" stop-color="#7c5cff" stop-opacity="0.6"/></linearGradient></defs></svg>
+              <div class="play" onclick="play('City Lights')">▶</div>
+            </div>
+            <div class="meta"><div><div class="title">City Lights</div><div class="sub">Electronic</div></div><div><div style="color:var(--muted);font-size:13px">4:01</div></div></div>
+            <div style="text-align:right"><button class="btn viewAcct" data-account-id="acct_1">View Account</button></div>
+          </article>
+
+          <article class="media">
+            <div class="thumb">
+              <svg width="100%" height="100%" viewBox="0 0 400 200" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><rect width="400" height="200" fill="url(#g4)"/><defs><linearGradient id="g4" x1="0" x2="1"><stop offset="0" stop-color="#ffd166" stop-opacity="0.9"/><stop offset="1" stop-color="#ff7ab6" stop-opacity="0.6"/></linearGradient></defs></svg>
+              <div class="play" onclick="play('Retro Beat')">▶</div>
+            </div>
+            <div class="meta"><div><div class="title">Retro Beat</div><div class="sub">Synthwave</div></div><div><div style="color:var(--muted);font-size:13px">3:18</div></div></div>
+            <div style="text-align:right"><button class="btn viewAcct" data-account-id="acct_1">View Account</button></div>
+          </article>
+
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    const followBtn = document.getElementById('followBtn');
+    let following = false;
+    followBtn.addEventListener('click', ()=>{
+      following = !following;
+      followBtn.textContent = following ? 'Following' : 'Follow';
+      followBtn.style.opacity = following ? '0.9' : '1';
+    });
+    function play(title){
+      alert('Playing: '+title+' (demo)');
+    }
+  </script>
+  <script>
+    // Fetch account info and follower count, update UI, and subscribe to SSE for live follower updates
+    function formatCount(n){
+      if(n>=1000) return (n/1000).toFixed(n%1000===0?0:1)+'K';
+      return String(n);
+    }
+
+    async function updateAccountAndFollowers(){
+      try{
+        const me = (()=>{try{return JSON.parse(localStorage.getItem('vynlo_user')||null)}catch(e){return null}})();
+        const acctId = me && me.id ? me.id : null;
+        let acct = null;
+        if(acctId){
+          const r = await fetch('/api/account?id='+encodeURIComponent(acctId));
+          if(r.ok) acct = await r.json();
+        }
+        if(!acct){
+          // not logged in or failed to load — show placeholder
+          document.getElementById('acctName').textContent = 'Guest';
+          document.getElementById('acctHandle').textContent = '@guest';
+          document.getElementById('avatar').textContent = 'G';
+          document.getElementById('acctDesc').textContent = 'Sign in to manage your profile.';
+          // hide edit button if no user
+          document.getElementById('editProfileBtn').style.display = 'none';
+          document.getElementById('followBtn').style.display = 'none';
+        } else {
+          document.getElementById('acctName').textContent = acct.name || acct.email || 'User';
+          const handle = acct.name ? ('@'+acct.name.replace(/\s+/g,'').toLowerCase()) : ('@'+(acct.email||'user').split('@')[0]);
+          document.getElementById('acctHandle').textContent = handle;
+          document.getElementById('avatar').textContent = (acct.name ? acct.name[0] : (acct.email||'U')[0]).toUpperCase();
+          document.getElementById('acctDesc').textContent = acct.description || '';
+          document.getElementById('editProfileBtn').style.display = '';
+          document.getElementById('followBtn').style.display = 'none';
+        }
+
+        const followers = await fetch('/api/followers').then(r=>r.json()).catch(()=>[]);
+        const count = acct && acct.id ? (followers || []).filter(f=>f.accountId === acct.id).length : 0;
+        document.getElementById('followerCount').textContent = formatCount(count);
+      }catch(err){console.error('account update failed',err)}
+    }
+
+    updateAccountAndFollowers();
+
+    if(typeof EventSource !== 'undefined'){
+      try{
+        const es = new EventSource('/sse/updates');
+        es.addEventListener('followers', e=>{
+          try{
+            const data = JSON.parse(e.data || '[]');
+            const me = (()=>{try{return JSON.parse(localStorage.getItem('vynlo_user')||null)}catch(e){return null}})();
+            const acctId = me && me.id ? me.id : null;
+            if(!acctId) return;
+            const count = (data || []).filter(f=>f.accountId === acctId).length;
+            document.getElementById('followerCount').textContent = formatCount(count);
+          }catch(err){console.error(err)}
+        });
+      }catch(e){console.warn('SSE not available',e)}
+    }
+    // wire Follow button to create a demo follower when clicked (if viewing another profile)
+    document.getElementById('followBtn').addEventListener('click', async function(){
+      const btn = this;
+      if(btn.dataset.added === '1') return; // already added
+      try{
+        btn.disabled = true;
+        const me = (()=>{try{return JSON.parse(localStorage.getItem('vynlo_user')||null)}catch(e){return null}})();
+        if(!me){ alert('Sign in to follow'); btn.disabled=false; return }
+        const email = 'guest+'+Date.now()+"@example.local";
+        const res = await fetch('/api/followers', {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({accountId:me.id, email, name:me.name||'Guest'})});
+        if(!res.ok) throw new Error('Server '+res.status);
+        btn.textContent = 'Following';
+        btn.dataset.added = '1';
+        // refresh follower count
+        updateAccountAndFollowers();
+      }catch(err){console.error(err);alert('Failed to follow: '+(err.message||err));btn.disabled=false}
+    });
+  </script>
+  <script>
+    // Account preview modal logic
+    (function(){
+      function el(id){return document.getElementById(id)}
+
+      // create modal element
+      const modal = document.createElement('div');
+      modal.id = 'acctPreview';
+      modal.style.display = 'none';
+      modal.style.position = 'fixed';
+      modal.style.inset = '0';
+      modal.style.background = 'rgba(2,6,12,0.6)';
+      modal.style.backdropFilter = 'blur(4px)';
+      modal.style.alignItems = 'center';
+      modal.style.justifyContent = 'center';
+      modal.style.zIndex = '80';
+      modal.innerHTML = `
+        <div style="width:100%;max-width:520px;margin:28px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:18px;border-radius:12px;border:1px solid rgba(255,255,255,0.04);color:inherit;">
+          <div style="display:flex;gap:12px;align-items:center">
+            <div id="pvAvatar" style="width:64px;height:64px;border-radius:12px;background:linear-gradient(135deg,#00d1ff,#7c5cff);display:flex;align-items:center;justify-content:center;font-weight:700;color:#071025;font-size:24px">U</div>
+            <div>
+              <div id="pvName" style="font-weight:700;font-size:18px">User</div>
+              <div id="pvHandle" style="color:var(--muted);font-size:13px">@handle</div>
+            </div>
+            <div style="margin-left:auto;text-align:right">
+              <div style="color:var(--muted);font-size:13px">Followers</div>
+              <div id="pvFollowers" style="font-weight:700">0</div>
+            </div>
+          </div>
+          <div style="margin-top:12px;display:flex;gap:8px;justify-content:flex-end">
+            <button id="pvClose" class="ghost">Close</button>
+            <a id="pvViewFull" class="btn" href="#">View Profile</a>
+          </div>
+        </div>
+      `;
+      document.body.appendChild(modal);
+
+      function showPreview(accountId){
+        // fetch account and follower count
+        Promise.all([
+          fetch('/api/accounts').then(r=>r.json()).catch(()=>[]),
+          fetch('/api/followers').then(r=>r.json()).catch(()=>[])
+        ]).then(([accounts,followers])=>{
+          const acct = (accounts||[]).find(a=>a.id===accountId) || (accounts && accounts[0]) || {name:'User',email:'user@example.com',id:accountId};
+          const count = (followers||[]).filter(f=>f.accountId===accountId).length;
+          el('pvAvatar').textContent = (acct.name?acct.name[0]: (acct.email||'U')[0]).toUpperCase();
+          el('pvName').textContent = acct.name || acct.email || 'User';
+          el('pvHandle').textContent = acct.name ? ('@'+acct.name.replace(/\s+/g,'').toLowerCase()) : ('@'+(acct.email||'user').split('@')[0]);
+          el('pvFollowers').textContent = count;
+          el('pvViewFull').href = 'home.html';
+          modal.style.display = 'flex';
+        }).catch(err=>{console.error(err);alert('Failed to load account preview')});
+      }
+
+      function hidePreview(){ modal.style.display = 'none'; }
+
+      document.addEventListener('click', e=>{
+        const btn = e.target.closest && e.target.closest('.viewAcct');
+        if(btn){ const acc = btn.getAttribute('data-account-id') || 'acct_1'; showPreview(acc); }
+      });
+
+      el('pvClose')?.addEventListener('click', hidePreview);
+      modal.addEventListener('click', e=>{ if(e.target===modal) hidePreview(); });
+      document.addEventListener('keydown', e=>{ if(e.key==='Escape') hidePreview(); });
+    })();
+  </script>
+  <script>
+    // Edit profile modal and update logic for current user (acct_1)
+    (function(){
+      const stored = (()=>{try{return JSON.parse(localStorage.getItem('vynlo_user')||null)}catch(e){return null}})();
+      let me = stored && stored.id ? stored.id : null;
+      let currentId = me;
+      const editBtn = document.getElementById('editProfileBtn');
+      if(!editBtn) return;
+
+      // build modal
+      const m = document.createElement('div');
+      m.style.display='none';m.style.position='fixed';m.style.inset='0';m.style.background='rgba(2,6,12,0.6)';m.style.backdropFilter='blur(4px)';m.style.alignItems='center';m.style.justifyContent='center';m.style.zIndex='90';
+      m.innerHTML = `
+        <div style="width:100%;max-width:520px;margin:28px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:18px;border-radius:12px;border:1px solid rgba(255,255,255,0.04);color:inherit;">
+          <h3 style="margin-top:0">Edit Profile</h3>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <input id="editName" placeholder="Display name" style="padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit" />
+            <textarea id="editDesc" rows="3" placeholder="Short description" style="padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit"></textarea>
+            <div style="display:flex;gap:8px;justify-content:flex-end">
+              <button id="editCancel" class="ghost">Cancel</button>
+              <button id="editSave" class="btn">Save</button>
+            </div>
+          </div>
+        </div>
+      `;
+      document.body.appendChild(m);
+
+      function open(){
+        // prefill with current values
+        const meObj = (()=>{try{return JSON.parse(localStorage.getItem('vynlo_user')||null)}catch(e){return null}})();
+        const myId = meObj && meObj.id ? meObj.id : me;
+        currentId = myId;
+        fetch('/api/account?id='+encodeURIComponent(myId)).then(async r=>{
+          if(!r.ok) throw new Error('Server returned '+r.status);
+          const acct = await r.json();
+          document.getElementById('editName').value = acct.name || '';
+          document.getElementById('editDesc').value = acct.description || '';
+          m.style.display = 'flex';
+        }).catch(err=>{
+          console.error('Failed to load account data', err);
+          alert('Failed to load account data: '+(err && err.message ? err.message : 'unknown error'));
+        });
+      }
+      function close(){ m.style.display='none'; }
+
+      editBtn.addEventListener('click', open);
+      document.getElementById('editCancel')?.addEventListener('click', close);
+      m.addEventListener('click', e=>{ if(e.target===m) close(); });
+
+      document.getElementById('editSave')?.addEventListener('click', ()=>{
+        const name = document.getElementById('editName').value.trim();
+        const description = document.getElementById('editDesc').value.trim();
+        if(!name){ alert('Name required'); return; }
+        fetch('/api/accounts/update', {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({id:currentId,name,description})})
+          .then(r=>r.json()).then(res=>{
+            if(res && res.error){alert('Update failed: '+res.error);return}
+            // update UI
+            document.getElementById('acctName').textContent = name;
+            document.getElementById('acctHandle').textContent = '@'+name.replace(/\s+/g,'').toLowerCase();
+            document.getElementById('avatar').textContent = name[0].toUpperCase();
+            close();
+          }).catch(err=>{console.error(err);alert('Update failed')});
+      });
+    })();
+  </script>
+</body>
+</html>

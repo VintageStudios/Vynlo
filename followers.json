@@ -1,0 +1,23 @@
+[
+  {
+    "id": "foll_1",
+    "accountId": "acct_1",
+    "email": "fan1@example.com",
+    "name": "Fan One",
+    "subscribedAt": "2026-01-09T00:00:00.000Z"
+  },
+  {
+    "id": "foll_2",
+    "accountId": "acct_2",
+    "email": "fan2@example.com",
+    "name": "Fan Two",
+    "subscribedAt": "2026-01-09T00:00:00.000Z"
+  },
+  {
+    "id": "dem",
+    "accountId": "acct_3",
+    "email": "demo@example.com",
+    "name": "Demo User",
+    "subscribedAt": "2026-01-09T23:55:44.534Z"
+  }
+]
